@@ -38,19 +38,14 @@ class Collector<T> {
             function(object : EmitterListener<T> {
                 override fun onData(response: T) {
                     mainThread { emitterListener?.onData(response) }
-                    if (repeat == 0 || duration == 0L) {
-                        onFinish()
-                    }
                 }
 
                 override fun onError(error: Throwable) {
                     mainThread { emitterListener?.onError(error) }
-//                    emitterListener = null
                 }
 
                 override fun onFinish() {
                     mainThread { emitterListener?.onFinish() }
-//                    emitterListener = null
                 }
             })
         }
